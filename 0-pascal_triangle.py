@@ -7,6 +7,10 @@ def pascal_triangle(n):
     returns a Pascal's Triangle
     of size 'n'
     """
+
+    if n <= 0:
+        return []
+
     triangle = [[1]]
     prev = []
     row = [1]
