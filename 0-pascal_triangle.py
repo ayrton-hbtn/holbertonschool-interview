@@ -12,20 +12,19 @@ def pascal_triangle(n):
         return []
 
     triangle = [[1]]
-    prev = []
-    row = [1]
-    current = 0
+    prev_line = []
+    prev_index = 0
 
     while n >= 2:
-        prev = triangle[current]
-        for i in range(len(prev)):
+        prev_line = triangle[prev_index]
+        row = [1]
+        for i in range(len(prev_line)):
             try:
-                row.append(prev[i] + prev[i + 1])
+                row.append(prev_line[i] + prev_line[i + 1])
             except IndexError:
                 row.append(1)
         triangle.append(row)
-        row = [1]
-        current += 1
+        prev_index += 1
         n -= 1
 
     return triangle
