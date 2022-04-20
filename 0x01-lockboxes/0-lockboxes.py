@@ -18,6 +18,9 @@ def canUnlockAll(boxes):
     keys[0] = 1  # first box is opened
 
     for i in range(n):  # iterate over boxes
+        if not boxes[i]:
+            keys[i] = 1
+            pass
         if keys[i] == 1:  # open box if we have the key
             for key in boxes[i]:  # for each key inside that box
                 try:
