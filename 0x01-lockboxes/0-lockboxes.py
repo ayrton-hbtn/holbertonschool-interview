@@ -9,29 +9,17 @@ def canUnlockAll(boxes):
     with the same number as the index of a box can
     open that box. Determine if all boxes can be opened.
     """
-    n = len(boxes)
-    if n <= 1:
+    if len(boxes) <= 1:
         return True
-    keys = [1]
-    for i in range(n - 1):
-        keys.append(0)
 
-    for i in range(n):
-        if keys[i] == 1:
-            for key in boxes[i]:
-                try:
-                    keys[key] = 1
-                except KeyError:
-                    pass
-        for i in range(n):
-            if keys[i] == 1:
-                for key in boxes[i]:
-                    try:
-                        keys[key] = 1
-                    except KeyError:
-                        pass
+    pending_boxes = [0]
+    opened_boxes = set(pending_boxes)
 
-    for key in keys:
-        if key == 0:
-            return False
-    return True
+    while pending_boxes:
+        current = pending_boxes.pop()
+        for key in boxes[current]:
+            if key not in opened_boxes and key < len(boxes):
+                opened_boxes.add(key)
+                pending_boxes.append(key)
+
+    return len(opened_boxes) == len(boxes)
