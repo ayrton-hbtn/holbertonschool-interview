@@ -19,7 +19,7 @@ def minOperations(n):
                 return num_operations + 2
             else:
                 return num_operations + 1
-        if n % 2 == 1 and n % 3 == 0 and len(h) == 2:
+        if n % 2 == 1 and n % 3 == 0 and len(h) % 2 == 0:
             h += copy
             num_operations += 1
             continue
