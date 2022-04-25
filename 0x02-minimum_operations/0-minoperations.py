@@ -11,10 +11,8 @@ def minOperations(n):
     h = 'H'
     copy = h
     num_operations = 0
-    print(f'h: {h} - operations: {num_operations} - copy: {copy}')
     while len(h) < n:
         if len(h + copy) >= n:
-            print(f'h: {h + copy} - operations: {num_operations + 1} - copy: {copy}')
             return num_operations + 1
         if n % 2 == 1 and n % 3 == 0 and len(h) == 2:
             h += copy
@@ -27,5 +25,4 @@ def minOperations(n):
         copy = h
         h += copy
         num_operations += 2
-        print(f'h: {h} - operations: {num_operations} - copy: {copy}')
     return num_operations
