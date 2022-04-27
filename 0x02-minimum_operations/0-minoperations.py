@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """Minimum operations"""
 
-from math import ceil
-
 
 def minOperations(n: int) -> int:
     """
@@ -13,20 +11,23 @@ def minOperations(n: int) -> int:
     if n == 1:
         return 0
     h = 'H'
-    copy = h[::]
-    min_operations = 1
-    for i in range(2, n + 1):
-        if len(h) >= n:
-            break
+    copy = h
+    num_operations = 0
+    while len(h) < n:
         if len(h + copy) >= n:
-            return min_operations + 1
-        if len(h) == 3:
-            copy = h[::]
-            min_operations += 1
-        if len(h) == i / 2 and len(copy) < len(h) / 2:
-            copy = h[::]
-            min_operations += 1
+            if len(h) == 1:
+                return num_operations + 2
+            else:
+                return num_operations + 1
+        if n % 2 == 1 and n % 3 == 0 and len(h) % 2 == 0:
+            h += copy
+            num_operations += 1
+            continue
+        elif len(h + copy) >= n - len(copy):
+            h += copy
+            num_operations += 1
+            continue
+        copy = h
         h += copy
-        min_operations += 1
-
-    return min_operations
+        num_operations += 2
+    return
