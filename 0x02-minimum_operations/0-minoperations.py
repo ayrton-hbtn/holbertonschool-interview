@@ -2,7 +2,7 @@
 """Minimum operations"""
 
 
-def minOperations(n):
+def minOperations(n: int) -> int:
     """
     Given n, calculate the fewest number of operations
     needed to result in exactly n H characters in the file
