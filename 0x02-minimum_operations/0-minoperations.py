@@ -8,26 +8,30 @@ def minOperations(n: int) -> int:
     needed to result in exactly n H characters in the file
     using only copy and paste operations
     """
-    if n == 1:
-        return 0
-    h = 'H'
-    copy = h
-    num_operations = 0
-    while len(h) < n:
+    first_cases = {
+        1: 0,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 5
+    }
+    for n_value, op in first_cases.items():
+        if n_value == n:
+            return op
+    h = 'HHHHHH'
+    copy = 'HHH'
+    min_operations = 5
+    for i in range(7, n + 1):
         if len(h + copy) >= n:
-            if len(h) == 1:
-                return num_operations + 2
-            else:
-                return num_operations + 1
-        if n % 2 == 1 and n % 3 == 0 and len(h) % 2 == 0:
-            h += copy
-            num_operations += 1
-            continue
-        elif len(h + copy) >= n - len(copy):
-            h += copy
-            num_operations += 1
-            continue
-        copy = h
+            return min_operations + 1
+        else:
+            if len(h) >= i / 2:
+                copy = h[::]
+                min_operations += 1
         h += copy
-        num_operations += 2
-    return num_operations
+        min_operations += 1
+        if len(h) >= n:
+            break
+
+    return min_operations
