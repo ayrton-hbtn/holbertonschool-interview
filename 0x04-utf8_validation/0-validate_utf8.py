@@ -13,20 +13,21 @@ def validUTF8(data):
     is called the significant byte and states the
     number of bytes that the character will have.
     """
-    byte_count = 0
+    num_bytes = 0
+    
     for byte in data:
-        if byte_count == 0:
+        if num_bytes == 0:
             if (byte >> 5) == 0b110:
-                byte_count = 1
+                num_bytes = 1
             elif (byte >> 4) == 0b1110:
-                byte_count = 2
+                num_bytes = 2
             elif (byte >> 3) == 0b11110:
-                byte_count = 3
+                num_bytes = 3
             elif (byte >> 7):
                 return False
         else:
             if (byte >> 6) == 0b10:
-                byte_count -= 1
+                num_bytes -= 1
             else:
                 return False
-        return byte_count == 0
+    return num_bytes == 0
