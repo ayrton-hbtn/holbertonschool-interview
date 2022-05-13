@@ -22,11 +22,7 @@ def validUTF8(data):
                 byte_count = 2
             elif (byte >> 3) == 0b11110:
                 byte_count = 3
-            elif (byte >> 2) == 0b111110:
-                byte_count = 4
-            elif (byte >> 1) == 0b1111110:
-                byte_count = 5
-            elif (byte >> 8):
+            elif (byte >> 7):
                 return False
         else:
             if (byte >> 6) == 0b10:
