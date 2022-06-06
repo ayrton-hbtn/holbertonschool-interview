@@ -12,6 +12,11 @@ def makeChange(coins, total):
     count = 0
     change = 0
     for coin in coins:
+        try:
+            if total % change in coins:
+                return count + 1
+        except ZeroDivisionError:
+            pass
         if change + coin > total:
             continue
         while change + coin <= total:
