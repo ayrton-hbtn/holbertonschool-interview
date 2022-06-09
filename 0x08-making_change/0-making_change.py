@@ -4,11 +4,12 @@
 
 def makeChange(coins, total):
     """
-    Given a pile of coins of different values,
-    determine the fewest number of coins needed
-    to meet a given amount total
+    Returns minimum amount of coins needed
+    to complete the total.
+    If total can't be made from coins, return
+    -1.
     """
-    temp_value = 0
+    count = 0
     coins.sort(reverse=True)
 
     if total < 0:
@@ -16,7 +17,7 @@ def makeChange(coins, total):
 
     for coin in coins:
         if total % coin <= total:
-            temp_value += total // coin
+            count += total // coin
             total = total % coin
 
-    return temp_value if total == 0 else -1
+    return count if total == 0 else -1
