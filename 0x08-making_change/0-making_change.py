@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Making Change"""
+"""Bottom-up dynamic programming"""
 
 
 def makeChange(coins, total):
@@ -8,23 +8,15 @@ def makeChange(coins, total):
     determine the fewest number of coins needed
     to meet a given amount total
     """
+    temp_value = 0
     coins.sort(reverse=True)
-    count = 0
-    change = 0
-    for coin in coins:
-        try:
-            if total % change in coins:
-                return count + 1
-        except ZeroDivisionError:
-            pass
-        if change + coin > total:
-            continue
-        while change + coin <= total:
-            change += coin
-            count += 1
-        if change == total:
-            break
 
-    if change != total:
-        return -1
-    return count
+    if total < 0:
+        return 0
+
+    for coin in coins:
+        if total % coin <= total:
+            temp_value += total // coin
+            total = total % coin
+
+    return temp_value if total == 0 else -1
